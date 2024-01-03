@@ -1,7 +1,8 @@
+import OperatingSystem from '../../OperatingSystem'
 import VM from './VM'
 
 abstract class Provider {
-	abstract createVM(vmOS: string): VM
+	abstract createVM(os: OperatingSystem): VM
 }
 
 export default Provider
