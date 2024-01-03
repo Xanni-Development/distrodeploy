@@ -1,4 +1,5 @@
 import Docker from 'dockerode'
+import { ReadStream, WriteStream } from 'fs'
 
 const docker = new Docker()
 
@@ -21,4 +22,23 @@ const container = await docker.createContainer({
 	Cmd: ['sleep', 'infinity'],
 })
 
+console.log(container.id)
+console.log(`Container ID: ${container.id}`)
+
 await container.start()
+
+const shell = await container.exec({
+	Cmd: ['/bin/bash'],
+	AttachStderr: true,
+	AttachStdout: true,
+	AttachStdin: true,
+	Tty: true,
+})
+
+console.log(`Shell ID: ${shell.id}`)
+
+const shellStream = await shell.start({ hijack: true, stdin: true, Tty: true })
+
+shellStream.pipe(process.stdout)
+
+shellStream.write('ls\n')
