@@ -1,0 +1,23 @@
+{
+	"name": "distrodeploy",
+	"version": "1.2.1",
+	"description": "distrodeploy",
+	"main": "dist/index.cjs",
+	"module": "dist/index.mjs",
+	"types": "dist/index.d.ts",
+	"type": "module",
+	"files": [
+		"dist"
+	],
+	"devDependencies": {
+		"@types/node": "^20.2.5",
+		"tsx": "^4.7.0",
+		"typescript": "^5.1.3"
+	},
+	"scripts": {
+		"start": "tsx ./src/index.ts"
+	},
+	"author": "kennarddh",
+	"license": "MIT",
+	"homepage": "https://github.com/kennarddh/babel-plugin-event-on-class-extend#readme"
+}
