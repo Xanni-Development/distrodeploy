@@ -10,6 +10,7 @@
 		"dist"
 	],
 	"devDependencies": {
+		"@types/dockerode": "^3.3.23",
 		"@types/node": "^20.2.5",
 		"tsx": "^4.7.0",
 		"typescript": "^5.1.3"
