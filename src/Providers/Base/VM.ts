@@ -1,7 +1,7 @@
 import Shell from './Shell'
 
 abstract class VM {
-	abstract createShell(): Shell
+	abstract createShell(): Promise<Shell>
 }
 
 export default VM
