@@ -19,5 +19,8 @@
 	},
 	"author": "kennarddh",
 	"license": "MIT",
-	"homepage": "https://github.com/kennarddh/babel-plugin-event-on-class-extend#readme"
+	"homepage": "https://github.com/kennarddh/babel-plugin-event-on-class-extend#readme",
+	"dependencies": {
+		"dockerode": "^4.0.2"
+	}
 }
