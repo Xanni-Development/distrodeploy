@@ -20,7 +20,7 @@ abstract class Provider {
 		options: ICreateVMOptions
 	): Promise<VM>
 
-	abstract getByID(id: string): Promise<VM | null>
+	abstract getVMByID(id: string): Promise<VM | null>
 }
 
 export default Provider

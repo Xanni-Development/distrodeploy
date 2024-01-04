@@ -41,7 +41,7 @@ class DockerProvider extends Provider {
 		return new DockerVM(container)
 	}
 
-	async getByID(id: string): Promise<VM> {
+	async getVMByID(id: string): Promise<VM> {
 		return new DockerVM(this.docker.getContainer(id))
 	}
 
