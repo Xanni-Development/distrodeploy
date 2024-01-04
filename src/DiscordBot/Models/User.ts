@@ -1,9 +1,9 @@
-import { DataTypes, Model } from 'sequelize'
+import { DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequelize'
 import sequelize from '../Database'
 
-class User extends Model {
+class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
 	declare id: number
-	declare discordID: BigInt
+	declare discordID: string
 }
 
 User.init(
@@ -15,7 +15,7 @@ User.init(
 			allowNull: false,
 		},
 		discordID: {
-			type: DataTypes.BIGINT.UNSIGNED,
+			type: DataTypes.STRING,
 			allowNull: false,
 			unique: true,
 		},
