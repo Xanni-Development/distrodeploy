@@ -19,6 +19,8 @@ abstract class Provider {
 		os: OperatingSystem,
 		options: ICreateVMOptions
 	): Promise<VM>
+
+	abstract getByID(id: string): Promise<VM | null>
 }
 
 export default Provider
