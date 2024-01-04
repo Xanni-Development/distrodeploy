@@ -5,7 +5,9 @@ import { Duplex, Readable, Writable } from 'stream'
 class DockerShell extends Shell {
 	private shell: Dockerode.Exec
 	private shellStream: Duplex
-	private outputStream: Readable = new Readable()
+	private outputStream: Readable = new Readable({
+		read() {},
+	})
 
 	constructor(shell: Dockerode.Exec, shellStream: Duplex) {
 		super()
