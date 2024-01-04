@@ -6,16 +6,11 @@ import { ICreateVMOptions } from '../Base/Provider'
 
 class DockerVM extends VM {
 	private container: Dockerode.Container
-	#createOptions: ICreateVMOptions
 
-	constructor(
-		container: Dockerode.Container,
-		createOptions: ICreateVMOptions
-	) {
+	constructor(container: Dockerode.Container) {
 		super()
 
 		this.container = container
-		this.#createOptions = createOptions
 	}
 
 	async createShell(): Promise<Shell> {
@@ -36,8 +31,32 @@ class DockerVM extends VM {
 		return new DockerShell(shell, shellStream)
 	}
 
-	get createOptions() {
-		return this.#createOptions
+	async start(): Promise<void> {
+		await this.container.start()
+	}
+
+	async pause(): Promise<void> {
+		await this.container.pause()
+	}
+
+	async unpause(): Promise<void> {
+		await this.container.unpause()
+	}
+
+	async stop(secondsWaitBeforeKillVM: number): Promise<void> {
+		await this.container.stop({ t: secondsWaitBeforeKillVM })
+	}
+
+	async restart(): Promise<void> {
+		await this.container.restart()
+	}
+
+	async kill(): Promise<void> {
+		await this.container.kill()
+	}
+
+	async remove(): Promise<void> {
+		await this.container.remove()
 	}
 
 	get id() {
