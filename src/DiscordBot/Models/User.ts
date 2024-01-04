@@ -23,6 +23,7 @@ User.init(
 	{ tableName: 'users', sequelize }
 )
 
+// Better to use migration but i'm lazy
 await User.sync({ alter: true })
 
 export default User
