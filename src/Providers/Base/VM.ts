@@ -1,4 +1,3 @@
-import { ICreateVMOptions } from './Provider'
 import Shell from './Shell'
 
 abstract class VM {
