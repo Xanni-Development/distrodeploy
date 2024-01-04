@@ -39,6 +39,10 @@ class DockerVM extends VM {
 	get createOptions() {
 		return this.#createOptions
 	}
+
+	get id() {
+		return this.container.id
+	}
 }
 
 export default DockerVM
