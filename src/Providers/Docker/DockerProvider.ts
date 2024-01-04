@@ -49,6 +49,8 @@ class DockerProvider extends Provider {
 		switch (os) {
 			case OperatingSystem['Ubuntu:22.04']:
 				return 'ubuntu:22.04'
+			case OperatingSystem['Alpine:3.14']:
+				return 'alpine:3.14'
 			default:
 				return null
 		}
