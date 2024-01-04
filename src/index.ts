@@ -1,4 +1,4 @@
-import OperatingSystem from './OperatingSystem'
+import OperatingSystem from './Providers/OperatingSystem'
 import DockerProvider from './Providers/Docker/DockerProvider'
 
 const provider = new DockerProvider()

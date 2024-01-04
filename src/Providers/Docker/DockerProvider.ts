@@ -1,5 +1,5 @@
 import Dockerode from 'dockerode'
-import OperatingSystem from '../../OperatingSystem'
+import OperatingSystem from '../OperatingSystem'
 import Provider, { ICreateVMOptions } from '../Base/Provider'
 import VM from '../Base/VM'
 import DockerVM from './DockerVM'
