@@ -6,7 +6,7 @@ import { ICreateVMOptions } from '../Base/Provider'
 
 class DockerVM extends VM {
 	private container: Dockerode.Container
-	private createOptions: ICreateVMOptions
+	#createOptions: ICreateVMOptions
 
 	constructor(
 		container: Dockerode.Container,
@@ -15,7 +15,7 @@ class DockerVM extends VM {
 		super()
 
 		this.container = container
-		this.createOptions = createOptions
+		this.#createOptions = createOptions
 	}
 
 	async createShell(): Promise<Shell> {
@@ -34,6 +34,10 @@ class DockerVM extends VM {
 		})
 
 		return new DockerShell(shell, shellStream)
+	}
+
+	get createOptions() {
+		return this.#createOptions
 	}
 }
 
