@@ -11,12 +11,14 @@ const Register: ICommand = {
 		await interaction.deferReply()
 
 		const user = await User.findOne({
-			where: { id: interaction.user.id },
+			where: { discordID: interaction.user.id },
 			attributes: ['id'],
 		})
 
 		if (user !== null)
-			return void (await interaction.editReply(`You already has an account.`))
+			return void (await interaction.editReply(
+				`You already has an account.`
+			))
 
 		await User.create({ discordID: interaction.user.id })
 
