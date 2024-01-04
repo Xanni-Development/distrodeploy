@@ -1,5 +1,9 @@
-// Sequelize
+import { Sequelize } from 'sequelize'
 
-const db = null
+const sequelize = new Sequelize(process.env.DB_HOST)
 
-export default db
+await sequelize.authenticate()
+
+console.log('DB Connected')
+
+export default sequelize
