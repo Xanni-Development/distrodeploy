@@ -3,7 +3,7 @@ import sequelize from '../Database'
 
 class User extends Model {
 	declare id: number
-	declare discordID: number
+	declare discordID: BigInt
 }
 
 User.init(
@@ -15,7 +15,7 @@ User.init(
 			allowNull: false,
 		},
 		discordID: {
-			type: DataTypes.INTEGER.UNSIGNED,
+			type: DataTypes.BIGINT.UNSIGNED,
 			allowNull: false,
 			unique: true,
 		},
