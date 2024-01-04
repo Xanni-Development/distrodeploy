@@ -10,6 +10,8 @@ abstract class VM {
 	abstract kill(): Promise<void>
 	abstract remove(): Promise<void>
 
+	abstract getShellByID(id: string): Promise<Shell | null>
+
 	abstract get id(): string
 }
 

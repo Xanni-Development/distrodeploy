@@ -38,11 +38,11 @@ class DockerProvider extends Provider {
 			},
 		})
 
-		return new DockerVM(container)
+		return new DockerVM(this.docker, container)
 	}
 
 	async getVMByID(id: string): Promise<VM> {
-		return new DockerVM(this.docker.getContainer(id))
+		return new DockerVM(this.docker, this.docker.getContainer(id))
 	}
 
 	private getDockerImageNameFromOS(os: OperatingSystem): string | null {

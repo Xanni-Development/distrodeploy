@@ -35,7 +35,7 @@ class DockerShell extends Shell {
 	getStdoutStream(): NodeJS.ReadableStream {
 		return this.outputStream
 	}
-
+	
 	get id() {
 		return this.shell.id
 	}

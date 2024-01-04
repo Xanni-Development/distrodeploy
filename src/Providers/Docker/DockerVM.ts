@@ -6,11 +6,13 @@ import { ICreateVMOptions } from '../Base/Provider'
 
 class DockerVM extends VM {
 	private container: Dockerode.Container
+	private docker: Dockerode
 
-	constructor(container: Dockerode.Container) {
+	constructor(docker: Dockerode, container: Dockerode.Container) {
 		super()
 
 		this.container = container
+		this.docker = docker
 	}
 
 	async createShell(): Promise<Shell> {
@@ -57,6 +59,18 @@ class DockerVM extends VM {
 
 	async remove(): Promise<void> {
 		await this.container.remove()
+	}
+
+	async getShellByID(id: string): Promise<DockerShell | null> {
+		const shell = this.docker.getExec(id)
+
+		const shellStream = await shell.start({
+			hijack: true,
+			stdin: true,
+			Tty: true,
+		})
+
+		return new DockerShell(shell, shellStream)
 	}
 
 	get id() {
