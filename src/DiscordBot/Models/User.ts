@@ -1,29 +1,20 @@
-import { DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequelize'
-import sequelize from '../Database'
+import { AllowNull, Model } from 'sequelize-typescript'
+import {
+	Column,
+	CreatedAt,
+	NotNull,
+	Table,
+	Unique,
+	UpdatedAt,
+} from 'sequelize-typescript'
+import { DataTypes } from 'sequelize'
 
-class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
-	declare id: number
+@Table({ tableName: 'users' })
+class User extends Model {
+	@AllowNull(false)
+	@Unique
+	@Column(DataTypes.STRING)
 	declare discordID: string
 }
-
-User.init(
-	{
-		id: {
-			type: DataTypes.INTEGER,
-			autoIncrement: true,
-			primaryKey: true,
-			allowNull: false,
-		},
-		discordID: {
-			type: DataTypes.STRING,
-			allowNull: false,
-			unique: true,
-		},
-	},
-	{ tableName: 'users', sequelize }
-)
-
-// Better to use migration but i'm lazy
-await User.sync({ alter: true })
 
 export default User
