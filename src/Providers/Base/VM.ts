@@ -2,7 +2,7 @@ import { ICreateVMOptions } from './Provider'
 import Shell from './Shell'
 
 abstract class VM {
-	abstract start(): Promise<Shell>
+	abstract start(): Promise<void>
 	abstract createShell(): Promise<Shell>
 	abstract pause(): Promise<void>
 	abstract unpause(): Promise<void>
