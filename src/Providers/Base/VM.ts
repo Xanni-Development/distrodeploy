@@ -11,8 +11,6 @@ abstract class VM {
 	abstract kill(): Promise<void>
 	abstract remove(): Promise<void>
 
-	abstract get createOptions(): ICreateVMOptions
-
 	abstract get id(): string
 }
 
