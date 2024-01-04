@@ -1,5 +1,5 @@
 enum OperatingSystem {
-	'Ubuntu:20.04',
+	'Ubuntu:22.04',
 }
 
 export default OperatingSystem

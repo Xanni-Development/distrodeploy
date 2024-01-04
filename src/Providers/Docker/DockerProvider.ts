@@ -47,7 +47,7 @@ class DockerProvider extends Provider {
 
 	private getDockerImageNameFromOS(os: OperatingSystem): string | null {
 		switch (os) {
-			case OperatingSystem['Ubuntu:20.04']:
+			case OperatingSystem['Ubuntu:22.04']:
 				return 'ubuntu:22.04'
 			default:
 				return null
