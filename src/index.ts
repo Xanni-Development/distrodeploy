@@ -1,44 +1,19 @@
-import Docker from 'dockerode'
-import { ReadStream, WriteStream } from 'fs'
+import OperatingSystem from './OperatingSystem'
+import DockerProvider from './Providers/Docker/DockerProvider'
 
-const docker = new Docker()
+const provider = new DockerProvider()
 
-console.log('pull start')
-
-const pullStream = await docker.pull('ubuntu:22.04')
-
-await new Promise((resolve, reject) => {
-	docker.modem.followProgress(pullStream, (err, res) =>
-		err ? reject(err) : resolve(res)
-	)
+const vm = await provider.createVM(OperatingSystem['Ubuntu:20.04'], {
+	cpus: 1,
+	memory: 100 * 1024 * 1024, //100MB
 })
 
-console.log('pull end')
+await vm.start()
 
-// await docker.run('ubuntu:22.04', ['/bin/bash'], process.stdout, {}, {})
+console.log(`VM id: ${vm.id}`)
 
-const container = await docker.createContainer({
-	Image: 'ubuntu:20.04',
-	Cmd: ['sleep', 'infinity'],
-})
+const shell = await vm.createShell()
 
-console.log(container.id)
-console.log(`Container ID: ${container.id}`)
+shell.getStdoutStream().pipe(process.stdout)
 
-await container.start()
-
-const shell = await container.exec({
-	Cmd: ['/bin/bash'],
-	AttachStderr: true,
-	AttachStdout: true,
-	AttachStdin: true,
-	Tty: true,
-})
-
-console.log(`Shell ID: ${shell.id}`)
-
-const shellStream = await shell.start({ hijack: true, stdin: true, Tty: true })
-
-shellStream.pipe(process.stdout)
-
-shellStream.write('ls\n')
+shell.write('ls\n')
