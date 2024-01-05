@@ -36,6 +36,8 @@ model VirtualMachine {
 
     vmShells           VMShell[]
     currentlySelecting User[]    @relation("selectedVM")
+
+    operatingSystem String @db.VarChar(255)
 }
 
 model VMShell {
