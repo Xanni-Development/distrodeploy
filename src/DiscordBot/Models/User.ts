@@ -1,17 +1,16 @@
 import {
 	AllowNull,
-	Default,
 	ForeignKey,
 	HasMany,
 	HasOne,
 	Model,
 } from 'sequelize-typescript'
 import { Column, Table, Unique } from 'sequelize-typescript'
-import { DataTypes } from 'sequelize'
+import { DataTypes, InferAttributes, InferCreationAttributes } from 'sequelize'
 import VM from './VM'
 
 @Table({ tableName: 'users' })
-class User extends Model {
+class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
 	@AllowNull(false)
 	@Unique
 	@Column(DataTypes.STRING)

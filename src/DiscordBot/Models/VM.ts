@@ -7,12 +7,12 @@ import {
 	Model,
 } from 'sequelize-typescript'
 import { Column, Table, Unique } from 'sequelize-typescript'
-import { DataTypes } from 'sequelize'
+import { DataTypes, InferAttributes, InferCreationAttributes } from 'sequelize'
 import User from './User'
 import Shell from './Shell'
 
 @Table({ tableName: 'virtualMachines' })
-class VM extends Model {
+class VM extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
 	@AllowNull(false)
 	@Unique
 	@Column(DataTypes.STRING)

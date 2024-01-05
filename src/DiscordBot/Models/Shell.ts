@@ -1,11 +1,11 @@
 import { AllowNull, BelongsTo, ForeignKey, Model } from 'sequelize-typescript'
 import { Column, Table, Unique } from 'sequelize-typescript'
-import { DataTypes } from 'sequelize'
+import { DataTypes, InferAttributes, InferCreationAttributes } from 'sequelize'
 import User from './User'
 import VM from './VM'
 
 @Table({ tableName: 'vmShells' })
-class Shell extends Model {
+class Shell extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
 	@AllowNull(false)
 	@Unique
 	@Column(DataTypes.STRING)
