@@ -1,9 +1,17 @@
-import { AllowNull, BelongsTo, ForeignKey, Model } from 'sequelize-typescript'
+import {
+	AllowNull,
+	BelongsTo,
+	ForeignKey,
+	HasMany,
+	HasOne,
+	Model,
+} from 'sequelize-typescript'
 import { Column, Table, Unique } from 'sequelize-typescript'
 import { DataTypes } from 'sequelize'
 import User from './User'
+import Shell from './Shell'
 
-@Table({ tableName: 'virtual-machines' })
+@Table({ tableName: 'virtualMachines' })
 class VM extends Model {
 	@AllowNull(false)
 	@Unique
@@ -15,6 +23,12 @@ class VM extends Model {
 
 	@BelongsTo(() => User, { foreignKey: { allowNull: false } })
 	declare owner: User
+
+	@HasMany(() => Shell)
+	declare shells: Shell[]
+
+	@HasOne(() => Shell, { foreignKey: { allowNull: true } })
+	declare selectedShell: Shell | null
 }
 
 export default VM
