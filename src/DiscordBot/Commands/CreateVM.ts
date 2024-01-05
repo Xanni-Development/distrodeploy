@@ -35,6 +35,11 @@ const CreateVM: ICommand = {
 			select: { id: true },
 		})
 
+		if (user === null)
+			return void (await interaction.editReply(
+				`You need to create an account to use this.`
+			))
+
 		const vm = await BotProvider.createVM(os, {
 			cpus: 1,
 			memory: 100 * 1024 * 1024, //100MB
