@@ -44,11 +44,9 @@ const ParseExec = async (message: Message<boolean>, command: string) => {
 		stdoutBuffer.length
 	)
 
-	await message.reply(`
-\`\`\`ansi
+	await message.reply(`\`\`\`ansi
 ${last1000BytesString}
-\`\`\`
-	`)
+\`\`\``)
 }
 
 export default ParseExec
