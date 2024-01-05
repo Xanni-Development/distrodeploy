@@ -7,32 +7,35 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model users {
-  id              Int               @id @default(autoincrement())
-  discordID       String            @unique(map: "discordID") @db.VarChar(255)
-  createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
-  virtualMachines VirtualMachines[]
+model User {
+  id        Int    @id @default(autoincrement())
+  discordID String @unique @db.VarChar(255)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  virtualMachines VirtualMachine[]
 }
 
-model VirtualMachines {
-  id        Int        @id @default(autoincrement())
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-  ownerID   Int?
-  users     users?     @relation(fields: [ownerID], references: [id], map: "virtualMachines_ibfk_1")
-  vmShells  VMShells[]
+model VirtualMachine {
+  id Int @id @default(autoincrement())
 
-  @@index([ownerID], map: "ownerID")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  ownerID Int
+  owner   User @relation(fields: [ownerID], references: [id])
+
+  vmShells VMShell[]
 }
 
-model VMShells {
-  id              Int              @id @default(autoincrement())
-  shell_id        String           @unique(map: "shell_id") @db.VarChar(255)
-  createdAt       DateTime         @default(now())
-  updatedAt       DateTime         @updatedAt
+model VMShell {
+  id       Int    @id @default(autoincrement())
+  shell_id String @unique(map: "shell_id") @db.VarChar(255)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   vmID            Int
-  virtualMachines VirtualMachines? @relation(fields: [vmID], references: [id], map: "vmShells_ibfk_1")
-
-  @@index([vmID], map: "vmID")
+  virtualMachines VirtualMachine @relation(fields: [vmID], references: [id])
 }
