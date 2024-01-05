@@ -2,6 +2,7 @@ import { SlashCommandBuilder } from 'discord.js'
 import { ICommand } from './Types'
 import prisma from '../Database'
 import BotProvider from '../Data/BotProvider'
+import { ContainerState } from '../../Providers/Base/VM'
 
 const StartVM: ICommand = {
 	data: new SlashCommandBuilder()
@@ -26,6 +27,11 @@ const StartVM: ICommand = {
 			))
 
 		const providerVM = await BotProvider.getVMByID(user.selectedVM.vmID)
+
+		if ((await providerVM.state) === ContainerState.Running)
+			return void (await interaction.editReply(
+				`Cannot start VM with id ${user.selectedVM.id} as it's already running.`
+			))
 
 		await providerVM.start()
 
