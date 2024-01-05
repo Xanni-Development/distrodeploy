@@ -1,52 +1,52 @@
 generator client {
-  provider = "prisma-client-js"
+    provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+    provider = "mysql"
+    url      = env("DATABASE_URL")
 }
 
 model User {
-  id        Int    @id @default(autoincrement())
-  discordID String @unique @db.VarChar(255)
+    id        Int    @id @default(autoincrement())
+    discordID String @unique @db.VarChar(255)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 
-  virtualMachines VirtualMachine[] @relation("virtualMachines")
+    virtualMachines VirtualMachine[] @relation("virtualMachines")
 
-  selectedVMID Int?
-  selectedVM   VirtualMachine? @relation(name: "selectedVM", fields: [selectedVMID], references: [id])
+    selectedVMID Int?
+    selectedVM   VirtualMachine? @relation(name: "selectedVM", fields: [selectedVMID], references: [id])
 
-  selectedShellID Int?
-  selectedShell   VMShell? @relation(fields: [selectedShellID], references: [id])
+    selectedShellID Int?
+    selectedShell   VMShell? @relation(fields: [selectedShellID], references: [id])
 }
 
 model VirtualMachine {
-  id Int @id @default(autoincrement())
+    id Int @id @default(autoincrement())
 
-  vmID String @unique @db.VarChar(255)
+    vmID String @unique @db.VarChar(255)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 
-  ownerID Int
-  owner   User @relation(name: "virtualMachines", fields: [ownerID], references: [id])
+    ownerID Int
+    owner   User @relation(name: "virtualMachines", fields: [ownerID], references: [id])
 
-  vmShells           VMShell[]
-  currentlySelecting User[]    @relation("selectedVM")
+    vmShells           VMShell[]
+    currentlySelecting User[]    @relation("selectedVM")
 }
 
 model VMShell {
-  id      Int    @id @default(autoincrement())
-  shellID String @unique @db.VarChar(255)
+    id      Int    @id @default(autoincrement())
+    shellID String @unique @db.VarChar(255)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 
-  vmID            Int
-  virtualMachines VirtualMachine @relation(fields: [vmID], references: [id])
+    vmID            Int
+    virtualMachines VirtualMachine @relation(fields: [vmID], references: [id])
 
-  currentlySelecting User[]
+    currentlySelecting User[]
 }
