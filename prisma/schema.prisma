@@ -51,4 +51,7 @@ model VMShell {
     virtualMachines VirtualMachine @relation(fields: [vmID], references: [id])
 
     currentlySelecting User[]
+
+    discordMessageChannelID String @db.VarChar(255)
+    discordMessageID        String @db.VarChar(255)
 }
