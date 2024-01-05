@@ -41,7 +41,14 @@ class DockerProvider extends Provider {
 		return new DockerVM(this.docker, container)
 	}
 
-	async getVMByID(id: string): Promise<VM> {
+	async getVMByID(id: string): Promise<VM | null> {
+		const containers = await this.docker.listContainers()
+		
+		const container =
+			containers.find(container => container.Id === id) ?? null
+
+		if (container === null) return null
+
 		return new DockerVM(this.docker, this.docker.getContainer(id))
 	}
 
