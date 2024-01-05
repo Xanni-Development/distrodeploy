@@ -8,7 +8,7 @@ export interface ICreateVMOptions {
 	memory: number
 
 	/**
-	 * CPU Period = cpus >= 1 ? floor(cpus) : cpus
+	 * CPU Period = max((cpus >= 1 ? floor(cpus) : cpus) * 100000, 1000000)
 	 * CPU Quota = cpus * 100000
 	 */
 	cpus: number

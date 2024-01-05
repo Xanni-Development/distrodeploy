@@ -33,7 +33,12 @@ class DockerProvider extends Provider {
 			Cmd: ['sleep', 'infinity'],
 			HostConfig: {
 				Memory: options.memory,
-				CpuPeriod: options.cpus >= 1 ? Math.floor(options.cpus) : options.cpus * 100000,
+				CpuPeriod: Math.max(
+					(options.cpus >= 1
+						? Math.floor(options.cpus)
+						: options.cpus) * 100000,
+					1000000
+				),
 				CpuQuota: options.cpus * 100000,
 			},
 		})
