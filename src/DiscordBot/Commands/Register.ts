@@ -12,6 +12,7 @@ const Register: ICommand = {
 
 		const user = await prisma.user.findFirst({
 			where: { discordID: interaction.user.id },
+			select: { id: true },
 		})
 
 		if (user !== null)
