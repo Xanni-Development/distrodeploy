@@ -1,6 +1,7 @@
 import {
 	AllowNull,
 	Default,
+	ForeignKey,
 	HasMany,
 	HasOne,
 	Model,
@@ -17,10 +18,13 @@ class User extends Model {
 	declare discordID: string
 
 	@HasMany(() => VM)
-	vms: VM[]
+	declare vms: VM[]
+
+	@ForeignKey(() => VM)
+	declare selectedVMID: VM | null
 
 	@HasOne(() => VM, { foreignKey: { allowNull: true } })
-	selectedVM: VM | null
+	declare selectedVM: VM | null
 }
 
 export default User

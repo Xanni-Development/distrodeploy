@@ -27,6 +27,9 @@ class VM extends Model {
 	@HasMany(() => Shell)
 	declare shells: Shell[]
 
+	@ForeignKey(() => Shell)
+	declare selectedShellID: Shell | null
+
 	@HasOne(() => Shell, { foreignKey: { allowNull: true } })
 	declare selectedShell: Shell | null
 }
