@@ -45,7 +45,7 @@ const CreateVM: ICommand = {
 			memory: 100 * 1024 * 1024, //100MB
 		})
 
-		await prisma.virtualMachine.create({
+		const vmResult = await prisma.virtualMachine.create({
 			data: {
 				owner: {
 					connect: user,
@@ -55,7 +55,7 @@ const CreateVM: ICommand = {
 		})
 
 		await interaction.editReply(
-			`Your vm with OS ${os} has been created. Select and start it to use it.\nThe vm id is \`${vm.id}\``
+			`Your vm with OS ${os} has been created. Select and start it to use it.\nThe vm id is \`${vmResult.id}\``
 		)
 	},
 }
