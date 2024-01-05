@@ -51,6 +51,7 @@ const CreateVM: ICommand = {
 					connect: user,
 				},
 				vmID: vm.id,
+				operatingSystem: os,
 			},
 		})
 
