@@ -1,5 +1,5 @@
 import Dockerode from 'dockerode'
-import VM from '../Base/VM'
+import VM, { ContainerState } from '../Base/VM'
 import Shell from '../Base/Shell'
 import DockerShell from './DockerShell'
 import { ICreateVMOptions } from '../Base/Provider'
@@ -61,6 +61,10 @@ class DockerVM extends VM {
 		await this.container.remove()
 	}
 
+	async inspect(): Promise<Dockerode.ContainerInspectInfo> {
+		return await this.container.inspect()
+	}
+
 	async getShellByID(id: string): Promise<DockerShell | null> {
 		try {
 			const shell = this.docker.getExec(id)
@@ -85,6 +89,30 @@ class DockerVM extends VM {
 
 	get id() {
 		return this.container.id
+	}
+
+	get state() {
+		return this.inspect().then(data => {
+			switch (data.State.Status) {
+				case 'created':
+					return ContainerState.Created
+				case 'running':
+					return ContainerState.Running
+				case 'paused':
+					return ContainerState.Paused
+				case 'restarting':
+					return ContainerState.Restarting
+				case 'removing':
+					return ContainerState.Removing
+				case 'exited':
+					return ContainerState.Exited
+				case 'dead':
+					return ContainerState.Dead
+
+				default:
+					throw new Error(`Docker inspect returned invalid State.Status: ${data.State.Status}`)
+			}
+		})
 	}
 }
 
