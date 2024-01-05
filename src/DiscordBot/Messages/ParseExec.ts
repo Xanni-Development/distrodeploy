@@ -1,9 +1,9 @@
 import { Message, TextBasedChannel } from 'discord.js'
 import BotProvider from '../Data/BotProvider'
-import OperatingSystem from '../../Providers/OperatingSystem'
+import OperatingSystem from '../../Constants/OperatingSystem'
 import { Writable } from 'stream'
 import client from '..'
-import ANSISequence from '../Constants/ANSISequence'
+import ANSISequence from '../../Constants/ANSISequence'
 
 let stdoutBuffer: null | Buffer = null
 

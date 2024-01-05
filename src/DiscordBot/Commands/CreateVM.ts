@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from 'discord.js'
 import { ICommand } from './Types'
-import OperatingSystem from '../../Providers/OperatingSystem'
+import OperatingSystem from '../../Constants/OperatingSystem'
 import prisma from '../Database'
 import BotProvider from '../Data/BotProvider'
 

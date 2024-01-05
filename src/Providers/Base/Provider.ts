@@ -1,4 +1,4 @@
-import OperatingSystem from '../OperatingSystem'
+import OperatingSystem from '../../Constants/OperatingSystem'
 import VM from './VM'
 
 export interface ICreateVMOptions {
