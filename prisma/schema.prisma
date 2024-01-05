@@ -14,7 +14,13 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  virtualMachines VirtualMachine[]
+  virtualMachines VirtualMachine[] @relation("virtualMachines")
+
+  selectedVMID Int?
+  selectedVM   VirtualMachine? @relation(name: "selectedVM", fields: [selectedVMID], references: [id])
+
+  selectedShellID Int?
+  selectedShell   VMShell? @relation(fields: [selectedShellID], references: [id])
 }
 
 model VirtualMachine {
@@ -26,9 +32,10 @@ model VirtualMachine {
   updatedAt DateTime @updatedAt
 
   ownerID Int
-  owner   User @relation(fields: [ownerID], references: [id])
+  owner   User @relation(name: "virtualMachines", fields: [ownerID], references: [id])
 
-  vmShells VMShell[]
+  vmShells           VMShell[]
+  currentlySelecting User[]    @relation("selectedVM")
 }
 
 model VMShell {
@@ -40,4 +47,6 @@ model VMShell {
 
   vmID            Int
   virtualMachines VirtualMachine @relation(fields: [vmID], references: [id])
+
+  currentlySelecting User[]
 }
