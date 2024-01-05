@@ -69,3 +69,5 @@ client.on(Events.MessageCreate, async message => {
 })
 
 client.login(process.env.DISCORD_TOKEN)
+
+export default client
