@@ -18,7 +18,10 @@ const StopVM: ICommand = {
 		await interaction.deferReply()
 
 		const secondsWaitBeforeKillVM =
-			interaction.options.getNumber('seconds-wait-before-kill-vm', false) ?? 5
+			interaction.options.getNumber(
+				'seconds-wait-before-kill-vm',
+				false
+			) ?? 5
 
 		const user = await prisma.user.findFirst({
 			where: { discordID: interaction.user.id },
@@ -32,7 +35,7 @@ const StopVM: ICommand = {
 
 		if (user.selectedVM === null)
 			return void (await interaction.editReply(
-				`Cannot find VM with id ${user.selectedVM.id}.`
+				`You haven't selected any VM.`
 			))
 
 		const providerVM = await BotProvider.getVMByID(user.selectedVM.vmID)

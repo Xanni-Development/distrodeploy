@@ -23,7 +23,7 @@ const StartVM: ICommand = {
 
 		if (user.selectedVM === null)
 			return void (await interaction.editReply(
-				`Cannot find VM with id ${user.selectedVM.id}.`
+				`You haven't selected any VM.`
 			))
 
 		const providerVM = await BotProvider.getVMByID(user.selectedVM.vmID)
