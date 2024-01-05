@@ -1,7 +1,7 @@
 import { SlashCommandBuilder } from 'discord.js'
 
 import { ICommand } from './Types'
-import User from '../Models/User'
+import prisma from '../Database'
 
 const Register: ICommand = {
 	data: new SlashCommandBuilder()
@@ -10,9 +10,8 @@ const Register: ICommand = {
 	async execute(interaction) {
 		await interaction.deferReply()
 
-		const user = await User.findOne({
+		const user = await prisma.user.findFirst({
 			where: { discordID: interaction.user.id },
-			attributes: ['id'],
 		})
 
 		if (user !== null)
@@ -20,7 +19,11 @@ const Register: ICommand = {
 				`You already has an account.`
 			))
 
-		await User.create({ discordID: interaction.user.id })
+		await prisma.user.create({
+			data: {
+				discordID: interaction.user.id,
+			},
+		})
 
 		await interaction.editReply(
 			`Hi <@${interaction.user.id}>, Your account has been created`

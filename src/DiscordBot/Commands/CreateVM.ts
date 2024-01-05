@@ -1,7 +1,6 @@
 import { SlashCommandBuilder } from 'discord.js'
 import { ICommand } from './Types'
 import OperatingSystem from '../../Providers/OperatingSystem'
-import VM from '../Models/VM'
 
 const CreateVM: ICommand = {
 	data: new SlashCommandBuilder()
