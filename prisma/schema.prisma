@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model users {
+  id              Int               @id @default(autoincrement())
+  discordID       String            @unique(map: "discordID") @db.VarChar(255)
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  virtualMachines VirtualMachines[]
+}
+
+model VirtualMachines {
+  id        Int        @id @default(autoincrement())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  ownerID   Int?
+  users     users?     @relation(fields: [ownerID], references: [id], map: "virtualMachines_ibfk_1")
+  vmShells  VMShells[]
+
+  @@index([ownerID], map: "ownerID")
+}
+
+model VMShells {
+  id              Int              @id @default(autoincrement())
+  shell_id        String           @unique(map: "shell_id") @db.VarChar(255)
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  vmID            Int
+  virtualMachines VirtualMachines? @relation(fields: [vmID], references: [id], map: "vmShells_ibfk_1")
+
+  @@index([vmID], map: "vmID")
+}
