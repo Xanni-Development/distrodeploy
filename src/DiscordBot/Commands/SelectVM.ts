@@ -53,7 +53,7 @@ const SelectVM: ICommand = {
 		})
 
 		await interaction.editReply(
-			`You have selected vm ${vm.id}`
+			`You have selected vm ${vm.id}.\nVM OS: ${vm.operatingSystem}`
 		)
 	},
 }
