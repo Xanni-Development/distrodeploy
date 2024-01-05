@@ -62,15 +62,25 @@ class DockerVM extends VM {
 	}
 
 	async getShellByID(id: string): Promise<DockerShell | null> {
-		const shell = this.docker.getExec(id)
+		try {
+			const shell = this.docker.getExec(id)
 
-		const shellStream = await shell.start({
-			hijack: true,
-			stdin: true,
-			Tty: true,
-		})
+			const shellStream = await shell.start({
+				hijack: true,
+				stdin: true,
+				Tty: true,
+			})
 
-		return new DockerShell(shell, shellStream)
+			return new DockerShell(shell, shellStream)
+		} catch (error) {
+			if (error instanceof Error) {
+				// TODO: Hacky
+				if (error.message.includes('(HTTP code 404) no such exec'))
+					return null
+			}
+
+			throw error
+		}
 	}
 
 	get id() {
