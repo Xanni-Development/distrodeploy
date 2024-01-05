@@ -20,13 +20,7 @@ const StartVM: ICommand = {
 				`You need to create an account to use this.`
 			))
 
-		const vm = await prisma.virtualMachine.findFirst({
-			where: {
-				id: user.selectedVM.id,
-			},
-		})
-
-		if (vm === null)
+		if (user.selectedVM === null)
 			return void (await interaction.editReply(
 				`Cannot find VM with id ${user.selectedVM.id}.`
 			))
