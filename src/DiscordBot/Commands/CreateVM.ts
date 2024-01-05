@@ -55,7 +55,7 @@ const CreateVM: ICommand = {
 		})
 
 		await interaction.editReply(
-			`Your vm with OS ${os} has been created. Select and start it to use it.`
+			`Your vm with OS ${os} has been created. Select and start it to use it.\nThe vm id is \`${vm.id}\``
 		)
 	},
 }
