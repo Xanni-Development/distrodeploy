@@ -33,7 +33,7 @@ class DockerProvider extends Provider {
 			Cmd: ['sleep', 'infinity'],
 			HostConfig: {
 				Memory: options.memory,
-				CpuPeriod: Math.floor(options.cpus) * 100000,
+				CpuPeriod: options.cpus >= 1 ? Math.floor(options.cpus) : options.cpus * 100000,
 				CpuQuota: options.cpus * 100000,
 			},
 		})
@@ -43,7 +43,7 @@ class DockerProvider extends Provider {
 
 	async getVMByID(id: string): Promise<VM | null> {
 		const containers = await this.docker.listContainers()
-		
+
 		const container =
 			containers.find(container => container.Id === id) ?? null
 
