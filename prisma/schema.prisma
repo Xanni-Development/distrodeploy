@@ -47,8 +47,8 @@ model VMShell {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    vmID            Int
-    virtualMachines VirtualMachine @relation(fields: [vmID], references: [id])
+    virtualMachineID Int
+    virtualMachine   VirtualMachine @relation(fields: [virtualMachineID], references: [id])
 
     currentlySelecting User[]
 
