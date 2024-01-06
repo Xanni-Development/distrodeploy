@@ -66,6 +66,10 @@ client.on(Events.MessageCreate, async message => {
 		const command = message.content.substring(1)
 
 		await ParseExec(message, command)
+	} else if (message.content.startsWith('|>')) {
+		const command = message.content.substring(2)
+
+		await ParseExec(message, command, false)
 	}
 })
 
