@@ -1,52 +1,40 @@
-import { Message, TextBasedChannel } from 'discord.js'
-import BotProvider from '../Data/BotProvider'
-import OperatingSystem from '../../Constants/OperatingSystem'
-import { Writable } from 'stream'
-import client from '..'
-import ANSISequence from '../../Constants/ANSISequence'
+import { Message } from 'discord.js'
+import prisma from '../Database'
+import ActiveShells from '../Data/ActiveShells'
+import SelectedShells from '../Data/SelectedShells'
 
-// let stdoutBuffer: null | Buffer = null
+const ParseExec = async (
+	message: Message<boolean>,
+	command: string,
+	sendNewLineWhenWritingCommand = true
+) => {
+	const user = await prisma.user.findFirst({
+		where: { discordID: message.author.id },
+		select: { selectedVM: true, selectedShell: true },
+	})
 
-// const vm = await BotProvider.createVM(OperatingSystem['Ubuntu:22.04'], {
-// 	cpus: 1,
-// 	memory: 100 * 1024 * 1024, //100MB
-// })
+	if (user === null)
+		return void (await message.reply(
+			`You need to create an account to use this.`
+		))
 
-// await vm.start()
+	if (user.selectedVM === null)
+		return void (await message.reply(`You haven't selected any VM.`))
 
-// console.log(`VM id: ${vm.id}`)
+	if (user.selectedShell === null)
+		return void (await message.reply(`You haven't selected any shell.`))
 
-// const shell = await vm.createShell()
+	if (!ActiveShells.has(user.selectedShell.id))
+		return void (await message.reply(`Your selected shell is not active.`))
 
-// console.log(`Shell id: ${shell.id}`)
+	if (!SelectedShells.has(user.selectedShell.id))
+		return void (await message.reply(
+			`Internal Error: Your selected shell is not selected.`
+		))
 
-// shell.getStdoutStream().pipe(
-// 	new Writable({
-// 		write(chunk: Buffer, encoding, callback) {
-// 			if (stdoutBuffer === null) stdoutBuffer = chunk
-// 			else stdoutBuffer = Buffer.concat([stdoutBuffer, chunk])
+	const shell = ActiveShells.get(user.selectedShell.id)
 
-// 			console.log(chunk.includes(ANSISequence.Clear))
-// 			console.log(chunk)
-// 			callback()
-// 		},
-// 	})
-// )
-
-const ParseExec = async (message: Message<boolean>, command: string) => {
-// 	await message.reply(`Exec \`${command}\``)
-
-// 	shell.write(`${command}\n`)
-
-// 	const last1000BytesString = stdoutBuffer.toString(
-// 		'utf8',
-// 		Math.max(stdoutBuffer.length - 1000, 0),
-// 		stdoutBuffer.length
-// 	)
-
-// 	await message.reply(`\`\`\`ansi
-// ${last1000BytesString}
-// \`\`\``)
+	shell.write(`${command}${sendNewLineWhenWritingCommand ? '\n' : ''}`)
 }
 
 export default ParseExec
