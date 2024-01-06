@@ -2,6 +2,7 @@ import CreateShell from './CreateShell.js'
 import CreateVM from './CreateVM.js'
 import Hi from './Hi.js'
 import Register from './Register.js'
+import SelectShell from './SelectShell.js'
 import SelectVM from './SelectVM.js'
 import StartVM from './StartVM.js'
 import StopVM from './StopVM.js'
@@ -14,6 +15,7 @@ const Commands = [
 	StartVM,
 	StopVM,
 	CreateShell,
+	SelectShell,
 ]
 
 export default Commands
