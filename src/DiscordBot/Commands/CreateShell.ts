@@ -3,6 +3,7 @@ import { ICommand } from './Types'
 import prisma from '../Database'
 import BotProvider from '../Data/BotProvider'
 import { ContainerState } from '../../Providers/Base/VM'
+import ActiveShells from '../Data/ActiveShells'
 
 const CreateShell: ICommand = {
 	data: new SlashCommandBuilder()
@@ -50,6 +51,8 @@ const CreateShell: ICommand = {
 				virtualMachine: { connect: user.selectedVM },
 			},
 		})
+
+		ActiveShells.set(shellResult.id, shell)
 
 		await interaction.editReply(
 			`Shell with id ${shellResult.id} in VM ${user.selectedVM.id} succesfully started.`
