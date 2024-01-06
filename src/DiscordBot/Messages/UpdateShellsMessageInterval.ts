@@ -4,7 +4,7 @@ import SelectedShells from '../Data/SelectedShells'
 import prisma from '../Database'
 
 // TODO: Need to remove deleted shell data from cache or it will be memory leak
-const shellLast1000BytesStringCache = new Map<number, string>()
+const shellLastBytesStringCache = new Map<number, string>()
 
 const UpdateShellsMessageInterval = () => {
 	// TODO: Refactor with IntervalRegistry class that support async
@@ -30,21 +30,20 @@ const UpdateShellsMessageInterval = () => {
 
 			const stdoutBuffer = shell.getStdoutBuffer()
 
-			const last1000BytesString = stdoutBuffer.toString(
+			const lastBytesString = stdoutBuffer.toString(
 				'utf8',
 				Math.max(stdoutBuffer.length - 1000, 0),
 				stdoutBuffer.length
 			)
 
-            // TODO: No need to update message if it's same as previous
+			// TODO: No need to update message if it's same as previous
 			if (
-				shellLast1000BytesStringCache.has(shellDB.id) &&
-				shellLast1000BytesStringCache.get(shellDB.id) ===
-					last1000BytesString
+				shellLastBytesStringCache.has(shellDB.id) &&
+				shellLastBytesStringCache.get(shellDB.id) === lastBytesString
 			)
 				return
 
-			await message.edit(`\`\`\`ansi\n${last1000BytesString}\n\`\`\``)
+			await message.edit(`\`\`\`ansi\n${lastBytesString}\n\`\`\``)
 		}
 	}, 500)
 }
