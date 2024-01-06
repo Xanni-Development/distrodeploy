@@ -8,7 +8,7 @@ class DockerShell extends Shell {
 	private outputStream: Readable = new Readable({
 		read() {},
 	})
-	private stdoutBuffer: Buffer
+	private stdoutBuffer: Buffer | null = null
 
 	constructor(shell: Dockerode.Exec, shellStream: Duplex) {
 		super()
