@@ -1,8 +1,8 @@
 import Shell from '../../Providers/Base/Shell'
 
 // Record<id, Shell>
-export type IActiveShells = Record<number, Shell>
+export type IActiveShells = Map<number, Shell>
 
-const ActiveShells: IActiveShells = {}
+const ActiveShells: IActiveShells = new Map()
 
 export default ActiveShells
