@@ -69,6 +69,10 @@ class DockerVM extends VM {
 		try {
 			const shell = this.docker.getExec(id)
 
+			const inspect = await shell.inspect()
+
+			if (inspect.ContainerID !== this.id) return null
+
 			const shellStream = await shell.start({
 				hijack: true,
 				stdin: true,
@@ -110,7 +114,9 @@ class DockerVM extends VM {
 					return ContainerState.Dead
 
 				default:
-					throw new Error(`Docker inspect returned invalid State.Status: ${data.State.Status}`)
+					throw new Error(
+						`Docker inspect returned invalid State.Status: ${data.State.Status}`
+					)
 			}
 		})
 	}
