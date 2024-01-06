@@ -7,6 +7,7 @@ import './Database/index.js'
 import { ICommand } from './Commands/Types.js'
 import Commands from './Commands/index.js'
 import ParseExec from './Messages/ParseExec.js'
+import UpdateShellsMessageInterval from './Messages/UpdateShellsMessageInterval.js'
 
 // Create a new client instance
 const client = new Client({
@@ -67,6 +68,8 @@ client.on(Events.MessageCreate, async message => {
 		await ParseExec(message, command)
 	}
 })
+
+UpdateShellsMessageInterval()
 
 client.login(process.env.DISCORD_TOKEN)
 
