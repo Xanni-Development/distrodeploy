@@ -36,7 +36,7 @@ const UpdateShellsMessageInterval = () => {
 				stdoutBuffer.length
 			)
 
-			// TODO: No need to update message if it's same as previous
+			// No need to update message if it's same as previous
 			if (
 				shellLastBytesStringCache.has(shellDB.id) &&
 				shellLastBytesStringCache.get(shellDB.id) === lastBytesString
