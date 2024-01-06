@@ -43,6 +43,8 @@ const UpdateShellsMessageInterval = () => {
 			)
 				return
 
+			shellLastBytesStringCache.set(shellDB.id, lastBytesString)
+
 			await message.edit(`\`\`\`ansi\n${lastBytesString}\n\`\`\``)
 		}
 	}, 500)
