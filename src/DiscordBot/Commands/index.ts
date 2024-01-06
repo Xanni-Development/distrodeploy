@@ -14,6 +14,7 @@ const Commands = [
 	StartVM,
 	StopVM,
 	CreateShell,
+	SelectVM,
 ]
 
 export default Commands
