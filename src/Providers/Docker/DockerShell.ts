@@ -8,6 +8,7 @@ class DockerShell extends Shell {
 	private outputStream: Readable = new Readable({
 		read() {},
 	})
+	private stdoutBuffer: Buffer
 
 	constructor(shell: Dockerode.Exec, shellStream: Duplex) {
 		super()
@@ -20,6 +21,13 @@ class DockerShell extends Shell {
 		const copyWritable = new Writable({
 			write: (chunk, encoding, callback) => {
 				outputStream.push(chunk, encoding)
+
+				if (this.stdoutBuffer === null) this.stdoutBuffer = chunk
+				else
+					this.stdoutBuffer = Buffer.concat([
+						this.stdoutBuffer,
+						chunk,
+					])
 
 				callback()
 			},
@@ -35,7 +43,11 @@ class DockerShell extends Shell {
 	getStdoutStream(): NodeJS.ReadableStream {
 		return this.outputStream
 	}
-	
+
+	getStdoutBuffer(): Buffer {
+		return this.stdoutBuffer
+	}
+
 	get id() {
 		return this.shell.id
 	}
