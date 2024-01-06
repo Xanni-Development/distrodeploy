@@ -25,7 +25,7 @@ const UpdateShellsMessageInterval = () => {
 				shellDB.discordMessageID
 			)
 
-            message.edit(`${Math.random()}`)
+			await message.edit(`${Math.random()}`)
 		}
 	}, 500)
 }
