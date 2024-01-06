@@ -2,6 +2,7 @@ import { SlashCommandBuilder } from 'discord.js'
 import { ICommand } from './Types'
 import prisma from '../Database'
 import SelectedShells from '../Data/SelectedShells'
+import ActiveShells from '../Data/ActiveShells'
 
 const SelectShell: ICommand = {
 	data: new SlashCommandBuilder()
@@ -43,6 +44,11 @@ const SelectShell: ICommand = {
 		if (shell === null)
 			return void (await interaction.editReply(
 				`Cannot find shell with id ${shellID} in VM ${user.selectedVM.id}.`
+			))
+
+		if (![...ActiveShells.keys()].includes(shellID))
+			return void (await interaction.editReply(
+				`Shell with id ${shellID} in VM ${user.selectedVM.id} is not active.`
 			))
 
 		await prisma.user.update({

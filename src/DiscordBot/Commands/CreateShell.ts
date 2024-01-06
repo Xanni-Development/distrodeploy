@@ -52,6 +52,7 @@ const CreateShell: ICommand = {
 			},
 		})
 
+		// Handle shell removed
 		ActiveShells.set(shellResult.id, shell)
 
 		await interaction.editReply(
