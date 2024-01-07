@@ -49,7 +49,7 @@ const SelectVM: ICommand = {
 				selectedVM: {
 					connect: vm,
 				},
-				selectedShell: null,
+				selectedShell: { disconnect: true },
 			},
 		})
 
