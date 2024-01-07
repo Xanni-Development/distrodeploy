@@ -9,6 +9,8 @@ services:
             DATABASE_URL: mysql://root:root@database:3306/distro_deploy?connect_timeout=15
         depends_on:
             - database
+        volumes:
+          - /var/run/docker.sock:/var/run/docker.sock
 
     database:
         image: mariadb:lts
