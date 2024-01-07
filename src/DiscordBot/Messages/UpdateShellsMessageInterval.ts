@@ -1,5 +1,6 @@
 import client from '..'
 import ActiveShells from '../Data/ActiveShells'
+import BotProvider from '../Data/BotProvider'
 import SelectedShells from '../Data/SelectedShells'
 import prisma from '../Database'
 
@@ -18,6 +19,38 @@ const UpdateShellsMessageInterval = () => {
 				},
 			})
 
+			const vmDB = await prisma.virtualMachine.findFirst({
+				where: {
+					id: shellDB.virtualMachineID,
+				},
+			})
+
+			const vm = await BotProvider.getVMByID(vmDB.vmID)
+
+			const runningShells = await vm.shellsID
+
+			const isShellStillRunnning = runningShells.includes(shell.id)
+
+			if (!isShellStillRunnning) {
+				await prisma.vMShell.delete({
+					where: {
+						id: selectedShellID,
+					},
+				})
+
+				await prisma.user.updateMany({
+					where: {
+						selectedShell: shellDB,
+					},
+					data: {
+						selectedShellID: null,
+					},
+				})
+
+				SelectedShells.delete(selectedShellID)
+				ActiveShells.delete(selectedShellID)
+			}
+
 			const channel = await client.channels.fetch(
 				shellDB.discordMessageChannelID
 			)
@@ -27,6 +60,8 @@ const UpdateShellsMessageInterval = () => {
 			const message = await channel.messages.fetch(
 				shellDB.discordMessageID
 			)
+
+			if (!isShellStillRunnning) return await message.edit('Shell died')
 
 			const stdoutBuffer = shell.getStdoutBuffer()
 
