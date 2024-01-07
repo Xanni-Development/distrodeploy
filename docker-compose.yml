@@ -18,7 +18,7 @@ services:
             - bot
 
 volumes:
-    data:
+    distro_deploy_database:
 
 networks:
     bot:
