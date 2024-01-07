@@ -8,4 +8,4 @@ RUN npm install
 
 RUN npm run build
 
-CMD sleep 20 && npx prisma migrate deploy && npx prisma generate && npm run deploy:commands && node ./dist/index.js
+CMD sleep 20 && npx prisma migrate deploy && npx prisma generate && npm run deploy:commands && node ./dist/DiscordBot/index.js
