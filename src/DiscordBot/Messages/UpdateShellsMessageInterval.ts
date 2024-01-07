@@ -1,4 +1,5 @@
 import client from '..'
+import SetAsyncInterval from '../../Common/SetAsyncInterval'
 import ActiveShells from '../Data/ActiveShells'
 import BotProvider from '../Data/BotProvider'
 import SelectedShells from '../Data/SelectedShells'
@@ -6,8 +7,7 @@ import ShellOutputCache from '../Data/ShellOutputCache'
 import prisma from '../Database'
 
 const UpdateShellsMessageInterval = () => {
-	// TODO: Refactor with IntervalRegistry class that support async
-	setInterval(async () => {
+	SetAsyncInterval(async () => {
 		for (const [selectedShellID, shell] of ActiveShells) {
 			const shellDB = await prisma.vMShell.findFirst({
 				where: {
@@ -59,7 +59,8 @@ const UpdateShellsMessageInterval = () => {
 				shellDB.discordMessageID
 			)
 
-			if (!isShellStillRunnning) return await message.edit('Shell died')
+			if (!isShellStillRunnning)
+				return void (await message.edit('Shell died'))
 
 			const stdoutBuffer = shell.getStdoutBuffer()
 
