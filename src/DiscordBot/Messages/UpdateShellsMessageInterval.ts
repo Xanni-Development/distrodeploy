@@ -49,6 +49,7 @@ const UpdateShellsMessageInterval = () => {
 
 				SelectedShells.delete(selectedShellID)
 				ActiveShells.delete(selectedShellID)
+				shellLastBytesStringCache.delete(shellDB.id)
 			}
 
 			const channel = await client.channels.fetch(
