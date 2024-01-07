@@ -18,6 +18,7 @@
 	},
 	"scripts": {
 		"start": "tsx ./src/DiscordBot/index.ts",
+		"build": "tsc",
 		"deploy:commands": "tsx ./src/DiscordBot/DeployCommands.ts"
 	},
 	"author": "kennarddh",
