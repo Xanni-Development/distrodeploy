@@ -53,15 +53,17 @@ const UpdateShellsMessageInterval = () => {
 				shellDB.discordMessageChannelID
 			)
 
-			if (!channel.isTextBased()) return
+			if (!channel.isTextBased()) continue
 
 			const message = await channel.messages.fetch(
 				shellDB.discordMessageID
 			)
 
-			if (!isShellStillRunnning)
-				return void (await message.edit('Shell died'))
+			if (!isShellStillRunnning) {
+				await message.edit('Shell died')
 
+				continue
+			}
 			const stdoutBuffer = shell.getStdoutBuffer()
 
 			const newOutput = stdoutBuffer.toString(
@@ -80,7 +82,7 @@ const UpdateShellsMessageInterval = () => {
 				cache.discordMessageID === shellDB.discordMessageID &&
 				cache.output === newOutput
 			)
-				return
+				continue
 
 			ShellOutputCache.set(shellDB.id, {
 				discordMessageChannelID: shellDB.discordMessageChannelID,
