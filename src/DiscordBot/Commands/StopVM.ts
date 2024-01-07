@@ -49,18 +49,16 @@ const StopVM: ICommand = {
 			where: { virtualMachine: user.selectedVM },
 		})
 
-		for (const shell of shells){
+		for (const shell of shells) {
 			const channel = await interaction.client.channels.fetch(
 				shell.discordMessageChannelID
 			)
 
 			if (!channel.isTextBased()) return
 
-			const message = await channel.messages.fetch(
-				shell.discordMessageID
-			)
+			const message = await channel.messages.fetch(shell.discordMessageID)
 
-			await message.edit("VM Stopped.")
+			await message.edit('VM Stopped.')
 		}
 
 		await prisma.vMShell.deleteMany({
