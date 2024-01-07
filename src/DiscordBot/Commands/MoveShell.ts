@@ -51,7 +51,7 @@ const MoveShell: ICommand = {
 		})
 
 		await interaction.editReply(
-			`You have moved shell ${user.selectedShell.id} output in VM ${user.selectedVM.id}.`
+			`You have moved shell ${user.selectedShell.id} output in VM ${user.selectedVM.id} to ${shellMessage.url}.`
 		)
 	},
 }
