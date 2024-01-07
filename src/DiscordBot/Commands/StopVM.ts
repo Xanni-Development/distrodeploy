@@ -45,6 +45,28 @@ const StopVM: ICommand = {
 				`Cannot stop VM with id ${user.selectedVM.id} as it's not running.`
 			))
 
+		const shells = await prisma.vMShell.findMany({
+			where: { virtualMachine: user.selectedVM },
+		})
+
+		for (const shell of shells){
+			const channel = await interaction.client.channels.fetch(
+				shell.discordMessageChannelID
+			)
+
+			if (!channel.isTextBased()) return
+
+			const message = await channel.messages.fetch(
+				shell.discordMessageID
+			)
+
+			await message.edit("VM Stopped.")
+		}
+
+		await prisma.vMShell.deleteMany({
+			where: { virtualMachine: user.selectedVM },
+		})
+
 		await providerVM.stop(secondsWaitBeforeKillVM)
 
 		await interaction.editReply(
