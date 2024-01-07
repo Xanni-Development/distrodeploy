@@ -3,6 +3,9 @@ import { ICommand } from './Types'
 import prisma from '../Database'
 import BotProvider from '../Data/BotProvider'
 import { ContainerState } from '../../Providers/Base/VM'
+import ActiveShells from '../Data/ActiveShells'
+import SelectedShells from '../Data/SelectedShells'
+import ShellOutputCache from '../Data/ShellOutputCache'
 
 const StopVM: ICommand = {
 	data: new SlashCommandBuilder()
@@ -59,6 +62,10 @@ const StopVM: ICommand = {
 			const message = await channel.messages.fetch(shell.discordMessageID)
 
 			await message.edit('VM Stopped.')
+
+			ActiveShells.delete(shell.id)
+			SelectedShells.delete(shell.id)
+			ShellOutputCache.delete(shell.id)
 		}
 
 		await prisma.vMShell.deleteMany({
