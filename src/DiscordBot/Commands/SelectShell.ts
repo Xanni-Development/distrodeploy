@@ -21,7 +21,7 @@ const SelectShell: ICommand = {
 
 		const user = await prisma.user.findFirst({
 			where: { discordID: interaction.user.id },
-			select: { id: true, selectedVM: true },
+			select: { id: true, selectedVM: true, selectedShell: true },
 		})
 
 		if (user === null)
@@ -51,6 +51,8 @@ const SelectShell: ICommand = {
 				`Shell with id ${shellID} in VM ${user.selectedVM.id} is not active.`
 			))
 
+		const previousSelectedShellDBID = user.selectedShell?.id
+
 		await prisma.user.update({
 			where: {
 				id: user.id,
@@ -62,6 +64,9 @@ const SelectShell: ICommand = {
 			},
 		})
 
+		if (previousSelectedShellDBID)
+			SelectedShells.delete(previousSelectedShellDBID)
+		
 		SelectedShells.add(shellID)
 
 		await interaction.editReply(
