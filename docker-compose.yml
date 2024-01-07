@@ -1,16 +1,24 @@
 version: '3'
 
-# Development
 services:
+    bot:
+        build: .
+        networks:
+            - bot
+        environment:
+            DATABASE_URL: mysql://root:root@localhost:3306/distro_deploy
     database:
         image: mariadb:lts
         environment:
             MYSQL_ROOT_PASSWORD: root
             MYSQL_DATABASE: distro_deploy
         volumes:
-            - data:/var/lib/mysql
-        ports:
-            - 3307:3306
+            - distro_deploy_database:/var/lib/mysql
+        networks:
+            - bot
 
 volumes:
     data:
+
+networks:
+    bot:
