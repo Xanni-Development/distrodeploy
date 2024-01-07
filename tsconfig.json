@@ -9,7 +9,9 @@
 		"resolveJsonModule": true,
 		"declaration": true,
 		"experimentalDecorators": true,
-		"emitDecoratorMetadata": true
+		"emitDecoratorMetadata": true,
+        "rootDir": "./src/",
+
 	},
 	"lib": ["ESNext"],
 	"include": ["src"]

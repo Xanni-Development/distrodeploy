@@ -1,8 +1,8 @@
 import { SlashCommandBuilder } from 'discord.js'
 import { ICommand } from './Types'
-import prisma from '../Database'
-import SelectedShells from '../Data/SelectedShells'
-import ActiveShells from '../Data/ActiveShells'
+import prisma from '../Database/index.js'
+import SelectedShells from '../Data/SelectedShells.js'
+import ActiveShells from '../Data/ActiveShells.js'
 
 const SelectShell: ICommand = {
 	data: new SlashCommandBuilder()

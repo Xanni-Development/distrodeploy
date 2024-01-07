@@ -1,5 +1,5 @@
 import Dockerode from 'dockerode'
-import Shell from '../Base/Shell'
+import Shell from '../Base/Shell.js'
 import { Duplex, Readable, Writable } from 'stream'
 
 class DockerShell extends Shell {

@@ -6,7 +6,7 @@ services:
         networks:
             - bot
         environment:
-            DATABASE_URL: mysql://root:root@localhost:3306/distro_deploy
+            DATABASE_URL: mysql://root:root@database:3306/distro_deploy?connect_timeout=15
         depends_on:
             - database
 

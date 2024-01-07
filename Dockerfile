@@ -8,7 +8,4 @@ RUN npm install
 
 RUN npm run build
 
-# Remove source file as it's not needed after build
-RUN rm -r ./src
-
-ENTRYPOINT [ "npx prisma migrate deploy && npm run deploy:commands && node index.js" ]
+CMD sleep 20 && npx prisma migrate deploy && npx prisma generate && npm run deploy:commands && node ./dist/index.js

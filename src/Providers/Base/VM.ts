@@ -1,4 +1,4 @@
-import Shell from './Shell'
+import Shell from './Shell.js'
 
 // https://docs.docker.com/engine/api/v1.43/#tag/Container/operation/ContainerInspect
 export enum ContainerState {

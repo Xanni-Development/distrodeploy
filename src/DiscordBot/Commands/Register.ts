@@ -1,7 +1,7 @@
 import { SlashCommandBuilder } from 'discord.js'
 
 import { ICommand } from './Types'
-import prisma from '../Database'
+import prisma from '../Database/index.js'
 
 const Register: ICommand = {
 	data: new SlashCommandBuilder()

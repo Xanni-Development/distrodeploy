@@ -1,10 +1,10 @@
-import client from '..'
-import SetAsyncInterval from '../../Common/SetAsyncInterval'
-import ActiveShells from '../Data/ActiveShells'
-import BotProvider from '../Data/BotProvider'
-import SelectedShells from '../Data/SelectedShells'
-import ShellOutputCache from '../Data/ShellOutputCache'
-import prisma from '../Database'
+import client from '../index.js'
+import SetAsyncInterval from '../../Common/SetAsyncInterval.js'
+import ActiveShells from '../Data/ActiveShells.js'
+import BotProvider from '../Data/BotProvider.js'
+import SelectedShells from '../Data/SelectedShells.js'
+import ShellOutputCache from '../Data/ShellOutputCache.js'
+import prisma from '../Database/index.js'
 
 const UpdateShellsMessageInterval = () => {
 	SetAsyncInterval(async () => {

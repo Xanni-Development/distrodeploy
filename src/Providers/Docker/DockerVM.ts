@@ -1,8 +1,7 @@
 import Dockerode from 'dockerode'
-import VM, { ContainerState } from '../Base/VM'
-import Shell from '../Base/Shell'
-import DockerShell from './DockerShell'
-import { ICreateVMOptions } from '../Base/Provider'
+import VM, { ContainerState } from '../Base/VM.js'
+import Shell from '../Base/Shell.js'
+import DockerShell from './DockerShell.js'
 
 class DockerVM extends VM {
 	private container: Dockerode.Container

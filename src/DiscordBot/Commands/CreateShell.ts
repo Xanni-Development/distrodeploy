@@ -1,9 +1,9 @@
 import { SlashCommandBuilder } from 'discord.js'
 import { ICommand } from './Types'
-import prisma from '../Database'
-import BotProvider from '../Data/BotProvider'
-import { ContainerState } from '../../Providers/Base/VM'
-import ActiveShells from '../Data/ActiveShells'
+import prisma from '../Database/index.js'
+import BotProvider from '../Data/BotProvider.js'
+import { ContainerState } from '../../Providers/Base/VM.js'
+import ActiveShells from '../Data/ActiveShells.js'
 
 const CreateShell: ICommand = {
 	data: new SlashCommandBuilder()

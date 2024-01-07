@@ -1,5 +1,5 @@
-import OperatingSystem from '../../Constants/OperatingSystem'
-import VM from './VM'
+import OperatingSystem from '../../Constants/OperatingSystem.js'
+import VM from './VM.js'
 
 export interface ICreateVMOptions {
 	/**

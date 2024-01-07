@@ -1,8 +1,8 @@
 import { SlashCommandBuilder } from 'discord.js'
 import { ICommand } from './Types'
-import prisma from '../Database'
-import BotProvider from '../Data/BotProvider'
-import { ContainerState } from '../../Providers/Base/VM'
+import prisma from '../Database/index.js'
+import BotProvider from '../Data/BotProvider.js'
+import { ContainerState } from '../../Providers/Base/VM.js'
 
 const StartVM: ICommand = {
 	data: new SlashCommandBuilder()

@@ -1,8 +1,8 @@
 import Dockerode from 'dockerode'
-import OperatingSystem from '../../Constants/OperatingSystem'
-import Provider, { ICreateVMOptions } from '../Base/Provider'
-import VM from '../Base/VM'
-import DockerVM from './DockerVM'
+import OperatingSystem from '../../Constants/OperatingSystem.js'
+import Provider, { ICreateVMOptions } from '../Base/Provider.js'
+import VM from '../Base/VM.js'
+import DockerVM from './DockerVM.js'
 
 class DockerProvider extends Provider {
 	private docker = new Dockerode()

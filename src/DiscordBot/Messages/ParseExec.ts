@@ -1,7 +1,7 @@
 import { Message } from 'discord.js'
-import prisma from '../Database'
-import ActiveShells from '../Data/ActiveShells'
-import SelectedShells from '../Data/SelectedShells'
+import prisma from '../Database/index.js'
+import ActiveShells from '../Data/ActiveShells.js'
+import SelectedShells from '../Data/SelectedShells.js'
 
 const ParseExec = async (
 	message: Message<boolean>,

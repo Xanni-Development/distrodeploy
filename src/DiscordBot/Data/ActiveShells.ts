@@ -1,4 +1,4 @@
-import Shell from '../../Providers/Base/Shell'
+import Shell from '../../Providers/Base/Shell.js'
 
 export type IActiveShells = Map<number, Shell>
 

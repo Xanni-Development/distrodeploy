@@ -1,5 +1,5 @@
-import Provider from '../../Providers/Base/Provider'
-import DockerProvider from '../../Providers/Docker/DockerProvider'
+import Provider from '../../Providers/Base/Provider.js'
+import DockerProvider from '../../Providers/Docker/DockerProvider.js'
 
 const BotProvider: Provider = new DockerProvider()
 
