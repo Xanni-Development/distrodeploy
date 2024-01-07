@@ -49,6 +49,7 @@ const SelectVM: ICommand = {
 				selectedVM: {
 					connect: vm,
 				},
+				selectedShell: null,
 			},
 		})
 
