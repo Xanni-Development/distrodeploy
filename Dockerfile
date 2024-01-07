@@ -1,6 +1,6 @@
 FROM node:20-alpine as builder
 
-ENV DATABASE_URL=
+ARG DATABASE_URL
 
 WORKDIR /app
 

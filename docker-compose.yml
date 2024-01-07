@@ -2,7 +2,10 @@ version: '3'
 
 services:
     bot:
-        build: .
+        build:
+            dockerfile: Dockerfile
+            args:
+                DATABASE_URL: mysql://root:root@localhost:3306/distro_deploy
         networks:
             - bot
         environment:
