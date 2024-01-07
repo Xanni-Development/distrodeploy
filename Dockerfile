@@ -8,9 +8,9 @@ COPY . .
 
 RUN npm install
 
+RUN npx prisma migrate deploy
 RUN npm run deploy:commands
 RUN npm run build
-RUN npx prisma migrate deploy
 
 # Remove all dependencies except production dependencies
 RUN npm prune --production
