@@ -7,6 +7,9 @@ services:
             - bot
         environment:
             DATABASE_URL: mysql://root:root@localhost:3306/distro_deploy
+        depends_on:
+            - database
+
     database:
         image: mariadb:lts
         environment:
