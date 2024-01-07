@@ -122,7 +122,7 @@ class DockerVM extends VM {
 	}
 
 	get shellsID() {
-		return this.inspect().then(data => data.ExecIDs)
+		return this.inspect().then(data => data.ExecIDs ?? [])
 	}
 }
 
