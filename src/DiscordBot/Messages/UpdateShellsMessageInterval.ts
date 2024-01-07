@@ -15,15 +15,15 @@ const UpdateShellsMessageInterval = () => {
 				where: {
 					id: selectedShellID,
 				},
-			})
-
-			const vmDB = await prisma.virtualMachine.findFirst({
-				where: {
-					id: shellDB.virtualMachineID,
+				select: {
+					virtualMachine: true,
+					id: true,
+					discordMessageID: true,
+					discordMessageChannelID: true,
 				},
 			})
 
-			const vm = await BotProvider.getVMByID(vmDB.vmID)
+			const vm = await BotProvider.getVMByID(shellDB.virtualMachine.vmID)
 
 			const runningShells = await vm.shellsID
 
