@@ -2,7 +2,7 @@ import client from '..'
 import ActiveShells from '../Data/ActiveShells'
 import BotProvider from '../Data/BotProvider'
 import SelectedShells from '../Data/SelectedShells'
-import ShellLastBytesStringCache from '../Data/ShellLastBytesStringCache'
+import ShellOutputCache from '../Data/ShellOutputCache'
 import prisma from '../Database'
 
 const UpdateShellsMessageInterval = () => {
@@ -21,6 +21,7 @@ const UpdateShellsMessageInterval = () => {
 				},
 			})
 
+			// TODO: Null shellDB
 			const vm = await BotProvider.getVMByID(shellDB.virtualMachine.vmID)
 
 			const runningShells = await vm.shellsID
@@ -45,7 +46,7 @@ const UpdateShellsMessageInterval = () => {
 
 				SelectedShells.delete(selectedShellID)
 				ActiveShells.delete(selectedShellID)
-				ShellLastBytesStringCache.delete(shellDB.id)
+				ShellOutputCache.delete(shellDB.id)
 			}
 
 			const channel = await client.channels.fetch(
@@ -62,22 +63,31 @@ const UpdateShellsMessageInterval = () => {
 
 			const stdoutBuffer = shell.getStdoutBuffer()
 
-			const lastBytesString = stdoutBuffer.toString(
+			const newOutput = stdoutBuffer.toString(
 				'utf8',
 				Math.max(stdoutBuffer.length - 1000, 0),
 				stdoutBuffer.length
 			)
 
+			const cache = ShellOutputCache.get(shellDB.id)
+
 			// No need to update message if it's same as previous
 			if (
-				ShellLastBytesStringCache.has(shellDB.id) &&
-				ShellLastBytesStringCache.get(shellDB.id) === lastBytesString
+				ShellOutputCache.has(shellDB.id) &&
+				cache.discordMessageChannelID ===
+					shellDB.discordMessageChannelID &&
+				cache.discordMessageID === shellDB.discordMessageID &&
+				cache.output === newOutput
 			)
 				return
 
-			ShellLastBytesStringCache.set(shellDB.id, lastBytesString)
+			ShellOutputCache.set(shellDB.id, {
+				discordMessageChannelID: shellDB.discordMessageChannelID,
+				discordMessageID: shellDB.discordMessageID,
+				output: newOutput,
+			})
 
-			await message.edit(`\`\`\`ansi\n${lastBytesString}\n\`\`\``)
+			await message.edit(`\`\`\`ansi\n${newOutput}\n\`\`\``)
 		}
 	}, 500)
 }
