@@ -2,10 +2,8 @@ import client from '..'
 import ActiveShells from '../Data/ActiveShells'
 import BotProvider from '../Data/BotProvider'
 import SelectedShells from '../Data/SelectedShells'
+import ShellLastBytesStringCache from '../Data/ShellLastBytesStringCache'
 import prisma from '../Database'
-
-// TODO: Need to remove deleted shell data from cache or it will be memory leak
-const shellLastBytesStringCache = new Map<number, string>()
 
 const UpdateShellsMessageInterval = () => {
 	// TODO: Refactor with IntervalRegistry class that support async
@@ -49,7 +47,7 @@ const UpdateShellsMessageInterval = () => {
 
 				SelectedShells.delete(selectedShellID)
 				ActiveShells.delete(selectedShellID)
-				shellLastBytesStringCache.delete(shellDB.id)
+				ShellLastBytesStringCache.delete(shellDB.id)
 			}
 
 			const channel = await client.channels.fetch(
@@ -74,12 +72,12 @@ const UpdateShellsMessageInterval = () => {
 
 			// No need to update message if it's same as previous
 			if (
-				shellLastBytesStringCache.has(shellDB.id) &&
-				shellLastBytesStringCache.get(shellDB.id) === lastBytesString
+				ShellLastBytesStringCache.has(shellDB.id) &&
+				ShellLastBytesStringCache.get(shellDB.id) === lastBytesString
 			)
 				return
 
-			shellLastBytesStringCache.set(shellDB.id, lastBytesString)
+			ShellLastBytesStringCache.set(shellDB.id, lastBytesString)
 
 			await message.edit(`\`\`\`ansi\n${lastBytesString}\n\`\`\``)
 		}
