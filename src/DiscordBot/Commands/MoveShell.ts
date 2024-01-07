@@ -49,6 +49,10 @@ const MoveShell: ICommand = {
 				discordMessageID: shellMessage.id,
 			},
 		})
+
+		await interaction.editReply(
+			`You have moved shell ${user.selectedShell.id} output in VM ${user.selectedVM.id}.`
+		)
 	},
 }
 
