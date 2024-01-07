@@ -8,9 +8,7 @@ import prisma from '../Database'
 const UpdateShellsMessageInterval = () => {
 	// TODO: Refactor with IntervalRegistry class that support async
 	setInterval(async () => {
-		for (const selectedShellID of SelectedShells) {
-			const shell = ActiveShells.get(selectedShellID)
-
+		for (const [selectedShellID, shell] of ActiveShells) {
 			const shellDB = await prisma.vMShell.findFirst({
 				where: {
 					id: selectedShellID,
