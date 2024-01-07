@@ -24,6 +24,7 @@ abstract class VM {
 	abstract getShellByID(id: string): Promise<Shell | null>
 
 	abstract get state(): Promise<ContainerState | null>
+	abstract get shellsID(): Promise<string[]>
 
 	abstract get id(): string
 }
