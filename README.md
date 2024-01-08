@@ -13,6 +13,11 @@ A quick way to deploy docker linux distributions to do some quick code testing.
 -   You're done the bot should be running
 -   To stop it run `docker compose down`. If you want to clear all data including database run `docker compose down -v`
 
+### Changing VM Provider
+
+-   In `./src/Providers/` there is Base provider and Docker provider. Base provider is the abstract class you will need to implement to make new provider.
+-   After you make the new provider maybe with `QEMU` change provider in `./src/DiscordBot/Data/BotProvider.ts` into your new provider
+
 ## Deployment Guide
 
 -   Install Docker
