@@ -6,11 +6,12 @@ services:
         networks:
             - bot
         environment:
-            DATABASE_URL: mysql://root:root@database:3306/distro_deploy?connect_timeout=120&pool_timeout=120
+            DATABASE_URL: mysql://root:root@database:3306/distro_deploy
         depends_on:
-            - database
+            database:
+                condition: service_healthy
         volumes:
-          - /var/run/docker.sock:/var/run/docker.sock
+            - /var/run/docker.sock:/var/run/docker.sock
 
     database:
         image: mariadb:lts
@@ -19,6 +20,15 @@ services:
             MYSQL_DATABASE: distro_deploy
         volumes:
             - distro_deploy_database:/var/lib/mysql
+        healthcheck:
+            test:
+                [
+                    'CMD',
+                    '/usr/local/bin/healthcheck.sh',
+                    '--su-mysql',
+                    '--connect',
+                    '--innodb_initialized',
+                ]
         networks:
             - bot
 
