@@ -19,7 +19,7 @@ const Help: ICommand = {
 
 		for (const command of Commands) {
 			embed.addFields({
-				name: command.data.name,
+				name: `/${command.data.name}`,
 				value: command.data.description,
 			})
 		}
