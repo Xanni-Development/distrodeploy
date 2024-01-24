@@ -68,11 +68,17 @@ const UpdateShellsMessageInterval = () => {
 			}
 			const stdoutBuffer = shell.getStdoutBuffer()
 
-			const newOutput = stdoutBuffer.toString(
-				'utf8',
-				Math.max(stdoutBuffer.length - maxOutputLengthInBytes, 0),
-				stdoutBuffer.length
-			)
+			const newOutput =
+				stdoutBuffer === null
+					? ''
+					: stdoutBuffer.toString(
+							'utf8',
+							Math.max(
+								stdoutBuffer.length - maxOutputLengthInBytes,
+								0
+							),
+							stdoutBuffer.length
+					  )
 
 			const cache = ShellOutputCache.get(shellDB.id)
 
