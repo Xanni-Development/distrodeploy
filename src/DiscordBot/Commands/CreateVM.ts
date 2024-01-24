@@ -55,6 +55,8 @@ const CreateVM: ICommand = {
 			},
 		})
 
+		await vm.rename(`distrodeploy_${vmResult.id}`)
+
 		await interaction.editReply(
 			`Your VM with id \`${vmResult.id}\` and OS ${os} has been created. Select and start it to use it.`
 		)
