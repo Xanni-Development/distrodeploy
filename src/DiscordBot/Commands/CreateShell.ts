@@ -29,6 +29,11 @@ const CreateShell: ICommand = {
 
 		const providerVM = await BotProvider.getVMByID(user.selectedVM.vmID)
 
+		if (providerVM === null)
+			return void (await interaction.editReply(
+				`Internal Error: Cannot find selected VM.`
+			))
+
 		if ((await providerVM.state) !== ContainerState.Running)
 			return void (await interaction.editReply(
 				`Cannot create shell in an inactive VM.`
