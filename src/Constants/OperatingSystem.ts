@@ -1,6 +1,6 @@
 enum OperatingSystem {
 	'Ubuntu:22.04' = 'Ubuntu:22.04',
-	'Alpine:3.14' = 'Alpine:3.14',
+	'Debian:12.4' = 'Debian:12.4',
 }
 
 export default OperatingSystem
