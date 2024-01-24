@@ -2,7 +2,6 @@ import { Message } from 'discord.js'
 import prisma from '../Database/index.js'
 import ActiveShells from '../Data/ActiveShells.js'
 import SelectedShells from '../Data/SelectedShells.js'
-import ANSISequence from '../../Constants/ANSISequence.js'
 
 const ParseExec = async (
 	message: Message<boolean>,
@@ -11,7 +10,11 @@ const ParseExec = async (
 ) => {
 	const user = await prisma.user.findFirst({
 		where: { discordID: message.author.id },
-		select: { selectedVM: true, selectedShell: true },
+		select: {
+			selectedVM: true,
+			selectedShell: true,
+			deleteCommandMessage: true,
+		},
 	})
 
 	if (user === null)
@@ -32,6 +35,8 @@ const ParseExec = async (
 		return void (await message.reply(
 			`Internal Error: Your selected shell is not selected.`
 		))
+
+	if (user.deleteCommandMessage && message.deletable) await message.delete()
 
 	const shell = ActiveShells.get(user.selectedShell.id)
 
