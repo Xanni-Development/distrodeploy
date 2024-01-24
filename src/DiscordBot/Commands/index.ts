@@ -8,6 +8,7 @@ import SelectVM from './SelectVM.js'
 import Sigint from './Sigint.js'
 import StartVM from './StartVM.js'
 import StopVM from './StopVM.js'
+import ToggleDeleteCommand from './ToggleDeleteCommand.js'
 
 const Commands = [
 	Hi,
@@ -20,6 +21,7 @@ const Commands = [
 	SelectShell,
 	MoveShell,
 	Sigint,
+	ToggleDeleteCommand,
 ]
 
 export default Commands
