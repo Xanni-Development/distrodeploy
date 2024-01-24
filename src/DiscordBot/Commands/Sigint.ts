@@ -2,7 +2,7 @@ import { SlashCommandBuilder } from 'discord.js'
 import { ICommand } from './Types'
 import prisma from '../Database/index.js'
 import ActiveShells from '../Data/ActiveShells.js'
-import ANSISequence from '../../Constants/ANSISequence'
+import ANSISequence from '../../Constants/ANSISequence.js'
 
 const Sigint: ICommand = {
 	data: new SlashCommandBuilder()
