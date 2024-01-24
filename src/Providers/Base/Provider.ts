@@ -12,6 +12,11 @@ export interface ICreateVMOptions {
 	 * CPU Quota = cpus * 100000
 	 */
 	cpus: number
+
+	/**
+	 * Created vm name
+	 */
+	name?: string
 }
 
 abstract class Provider {

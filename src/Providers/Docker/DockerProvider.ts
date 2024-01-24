@@ -41,6 +41,7 @@ class DockerProvider extends Provider {
 				),
 				CpuQuota: options.cpus * 100000,
 			},
+			name: options.name ?? '',
 		})
 
 		return new DockerVM(this.docker, container)
