@@ -1,7 +1,7 @@
 import { EmbedBuilder, SlashCommandBuilder } from 'discord.js'
 
 import { ICommand } from './Types'
-import Commands from '.'
+import Commands from './index.js'
 
 const Help: ICommand = {
 	data: new SlashCommandBuilder()
