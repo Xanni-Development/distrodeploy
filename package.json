@@ -2,8 +2,7 @@
 	"name": "distrodeploy",
 	"version": "1.2.1",
 	"description": "distrodeploy",
-	"main": "dist/index.cjs",
-	"module": "dist/index.mjs",
+	"module": "dist/index.js",
 	"types": "dist/index.d.ts",
 	"type": "module",
 	"files": [
