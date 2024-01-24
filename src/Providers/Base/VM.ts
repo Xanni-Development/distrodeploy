@@ -20,6 +20,10 @@ abstract class VM {
 	abstract restart(): Promise<void>
 	abstract kill(): Promise<void>
 	abstract remove(): Promise<void>
+
+	/**
+	 * @param newName must not be empty string
+	 */
 	abstract rename(newName: string): Promise<void>
 
 	abstract getShellByID(id: string): Promise<Shell | null>

@@ -91,6 +91,8 @@ class DockerVM extends VM {
 	}
 
 	async rename(newName: string): Promise<void> {
+		if (newName === '') throw new Error('Name cannot be empty')
+
 		await this.container.rename(newName)
 	}
 
