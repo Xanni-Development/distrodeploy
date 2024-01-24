@@ -6,6 +6,8 @@ import SelectedShells from '../Data/SelectedShells.js'
 import ShellOutputCache from '../Data/ShellOutputCache.js'
 import prisma from '../Database/index.js'
 
+const maxOutputLengthInBytes = 1900
+
 const UpdateShellsMessageInterval = () => {
 	SetAsyncInterval(async () => {
 		for (const [selectedShellID, shell] of ActiveShells) {
@@ -68,7 +70,7 @@ const UpdateShellsMessageInterval = () => {
 
 			const newOutput = stdoutBuffer.toString(
 				'utf8',
-				Math.max(stdoutBuffer.length - 1000, 0),
+				Math.max(stdoutBuffer.length - maxOutputLengthInBytes, 0),
 				stdoutBuffer.length
 			)
 
