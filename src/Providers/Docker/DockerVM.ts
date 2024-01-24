@@ -90,6 +90,10 @@ class DockerVM extends VM {
 		}
 	}
 
+	async rename(newName: string): Promise<void> {
+		await this.container.rename(newName)
+	}
+
 	get id() {
 		return this.container.id
 	}
