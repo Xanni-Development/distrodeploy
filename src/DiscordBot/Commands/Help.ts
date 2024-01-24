@@ -24,6 +24,11 @@ const Help: ICommand = {
 			})
 		}
 
+		embed.addFields({
+			name: `Sending command to selected shell`,
+			value: "Any messages prefixed with `>` will be sent to the selected shell with \\n or new line added to the end. If you don't want to add new line to the command, prefix the command with `|>` instead of `>`.",
+		})
+
 		await interaction.editReply({ embeds: [embed] })
 	},
 }
