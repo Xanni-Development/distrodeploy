@@ -1,6 +1,7 @@
 import Dockerode from 'dockerode'
 import Shell from '../Base/Shell.js'
 import { Duplex, Readable, Writable } from 'stream'
+import ANSISequence from '../../Constants/ANSISequence.js'
 
 class DockerShell extends Shell {
 	private shell: Dockerode.Exec
@@ -19,17 +20,20 @@ class DockerShell extends Shell {
 		const outputStream = this.outputStream
 
 		const copyWritable = new Writable({
-			write: (chunk, encoding, callback) => {
+			write: (chunk: Buffer, encoding, callback) => {
 				outputStream.push(chunk, encoding)
 
-				if (this.stdoutBuffer === null) this.stdoutBuffer = chunk
-				else
-					this.stdoutBuffer = Buffer.concat([
-						this.stdoutBuffer,
-						chunk,
-					])
+				if (chunk.includes(ANSISequence.Clear)) this.stdoutBuffer = null
+				else {
+					if (this.stdoutBuffer === null) this.stdoutBuffer = chunk
+					else
+						this.stdoutBuffer = Buffer.concat([
+							this.stdoutBuffer,
+							chunk,
+						])
 
-				callback()
+					callback()
+				}
 			},
 		})
 
