@@ -8,7 +8,7 @@ const Help: ICommand = {
 		.setName('help')
 		.setDescription('Show help!'),
 	async execute(interaction) {
-		interaction.deferReply()
+		await interaction.deferReply()
 
 		const embed = new EmbedBuilder()
 			.setColor(0x00ff00)
@@ -18,17 +18,13 @@ const Help: ICommand = {
 			)
 
 		for (const command of Commands) {
-			console.log(command.data.name)
-			console.log(command.data.description)
-			console.log(command.data.options?.[0].toJSON())
-
 			embed.addFields({
 				name: command.data.name,
 				value: command.data.description,
 			})
 		}
 
-		await interaction.reply({ embeds: [embed] })
+		await interaction.editReply({ embeds: [embed] })
 	},
 }
 
