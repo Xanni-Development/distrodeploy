@@ -1,5 +1,6 @@
 import CreateShell from './CreateShell.js'
 import CreateVM from './CreateVM.js'
+import Help from './Help.js'
 import Hi from './Hi.js'
 import MoveShell from './MoveShell.js'
 import Register from './Register.js'
@@ -22,6 +23,7 @@ const Commands = [
 	MoveShell,
 	Sigint,
 	ToggleDeleteCommand,
+	Help,
 ]
 
 export default Commands
