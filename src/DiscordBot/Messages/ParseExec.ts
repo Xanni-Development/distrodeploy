@@ -2,6 +2,7 @@ import { Message } from 'discord.js'
 import prisma from '../Database/index.js'
 import ActiveShells from '../Data/ActiveShells.js'
 import SelectedShells from '../Data/SelectedShells.js'
+import ANSISequence from '../../Constants/ANSISequence.js'
 
 const ParseExec = async (
 	message: Message<boolean>,
