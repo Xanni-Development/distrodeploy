@@ -61,7 +61,7 @@ const ResizeShell: ICommand = {
 
 		const shell = ActiveShells.get(user.selectedShell.id)
 
-		shell.resize(width, height)
+		await shell.resize(width, height)
 
 		interaction.editReply(
 			`Shell TTY Resized to ${width}x${height} characters`
