@@ -52,6 +52,13 @@ class DockerShell extends Shell {
 		return this.stdoutBuffer
 	}
 
+	async resize(width: number, height: number): Promise<void> {
+		await this.shell.resize({
+			w: width,
+			h: height,
+		})
+	}
+
 	get id() {
 		return this.shell.id
 	}
