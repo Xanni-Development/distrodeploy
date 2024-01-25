@@ -7,7 +7,7 @@ import prisma from '../Database/index.js'
 const ResizeShell: ICommand = {
 	data: new SlashCommandBuilder()
 		.setName('resize-shell')
-		.setDescription('Send a command to the selected shell privately!')
+		.setDescription('Resize the TTY characters size!')
 		.addIntegerOption(option =>
 			option
 				.setName('width')
