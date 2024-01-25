@@ -64,6 +64,8 @@ class DockerProvider extends Provider {
 				return 'ubuntu:22.04'
 			case OperatingSystem['Debian:12.4']:
 				return 'debian:12.4'
+			case OperatingSystem['RedHatUniversalBaseImage:9.3']:
+				return 'registry.access.redhat.com/ubi9/ubi:9.3'
 			default:
 				return null
 		}
