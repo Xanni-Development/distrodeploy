@@ -72,6 +72,8 @@ class DockerProvider extends Provider {
 				return 'linuxmintd/mint21.2-amd64:latest'
 			case OperatingSystem['ArchLinux:latest']:
 				return 'archlinux:latest'
+			case OperatingSystem['Slackware:15.0']:
+				return 'aclemons/slackware:15.0'
 			default:
 				return null
 		}

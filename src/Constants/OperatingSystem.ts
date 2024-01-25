@@ -5,6 +5,7 @@ enum OperatingSystem {
 	'KaliLinux:latest' = 'KaliLinux:latest',
 	'LinuxMint:21.2' = 'LinuxMint:21.2',
 	'ArchLinux:latest' = 'ArchLinux:latest',
+	'Slackware:15.0' = 'Slackware:15.0',
 }
 
 export default OperatingSystem
