@@ -66,6 +66,8 @@ class DockerProvider extends Provider {
 				return 'debian:12.4'
 			case OperatingSystem['RedHatUniversalBaseImage:9.3']:
 				return 'registry.access.redhat.com/ubi9/ubi:9.3'
+			case OperatingSystem['KaliLinux:latest']:
+				return 'kalilinux/kali-rolling:latest'
 			default:
 				return null
 		}
