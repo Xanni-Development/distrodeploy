@@ -5,6 +5,7 @@ import BotProvider from '../Data/BotProvider.js'
 import SelectedShells from '../Data/SelectedShells.js'
 import ShellOutputCache from '../Data/ShellOutputCache.js'
 import prisma from '../Database/index.js'
+import ansiRegex from 'ansi-regex'
 
 const maxOutputLengthInBytes = 1900
 
@@ -71,14 +72,17 @@ const UpdateShellsMessageInterval = () => {
 			const newOutput =
 				stdoutBuffer === null
 					? ''
-					: stdoutBuffer.toString(
-							'utf8',
-							Math.max(
-								stdoutBuffer.length - maxOutputLengthInBytes,
-								0
-							),
-							stdoutBuffer.length
-					  )
+					: stdoutBuffer
+							.toString(
+								'utf8',
+								Math.max(
+									stdoutBuffer.length -
+										maxOutputLengthInBytes,
+									0
+								),
+								stdoutBuffer.length
+							)
+							.replace(ansiRegex(), '')
 
 			const cache = ShellOutputCache.get(shellDB.id)
 
