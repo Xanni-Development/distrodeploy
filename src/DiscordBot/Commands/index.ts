@@ -4,6 +4,7 @@ import Help from './Help.js'
 import Hi from './Hi.js'
 import MoveShell from './MoveShell.js'
 import Register from './Register.js'
+import PrivateCommand from './PrivateCommand.js'
 import SelectShell from './SelectShell.js'
 import SelectVM from './SelectVM.js'
 import Sigint from './Sigint.js'
@@ -24,6 +25,7 @@ const Commands = [
 	Sigint,
 	ToggleDeleteCommand,
 	Help,
+	PrivateCommand,
 ]
 
 export default Commands
