@@ -68,6 +68,8 @@ class DockerProvider extends Provider {
 				return 'registry.access.redhat.com/ubi9/ubi:9.3'
 			case OperatingSystem['KaliLinux:latest']:
 				return 'kalilinux/kali-rolling:latest'
+			case OperatingSystem['LinuxMint:21.2']:
+				return 'linuxmintd/mint21.2-amd64:latest'
 			default:
 				return null
 		}
