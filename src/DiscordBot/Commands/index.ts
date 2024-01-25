@@ -11,6 +11,7 @@ import Sigint from './Sigint.js'
 import StartVM from './StartVM.js'
 import StopVM from './StopVM.js'
 import ToggleDeleteCommand from './ToggleDeleteCommand.js'
+import ResizeShell from './ResizeShell.js'
 
 const Commands = [
 	Hi,
@@ -26,6 +27,7 @@ const Commands = [
 	ToggleDeleteCommand,
 	Help,
 	PrivateCommand,
+	ResizeShell,
 ]
 
 export default Commands
