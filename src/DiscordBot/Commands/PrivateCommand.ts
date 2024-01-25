@@ -33,7 +33,6 @@ const PrivateCommand: ICommand = {
 			select: {
 				selectedVM: true,
 				selectedShell: true,
-				deleteCommandMessage: true,
 			},
 		})
 
