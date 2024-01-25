@@ -70,6 +70,8 @@ class DockerProvider extends Provider {
 				return 'kalilinux/kali-rolling:latest'
 			case OperatingSystem['LinuxMint:21.2']:
 				return 'linuxmintd/mint21.2-amd64:latest'
+			case OperatingSystem['ArchLinux:latest']:
+				return 'archlinux:latest'
 			default:
 				return null
 		}
