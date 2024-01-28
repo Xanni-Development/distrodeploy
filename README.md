@@ -1,6 +1,7 @@
 # DistroDeploy
 
 A quick way to deploy docker linux distributions to do some quick code testing.
+or setup a local hosting client to host your bots using the dockers
 
 ## Development Guide
 
