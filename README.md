@@ -1,3 +1,8 @@
+# Archived
+
+distrodeploy1 (this one) will be archived since we are doing a full rewrite, when distrodeploy 2 is created i will link this to it
+
+
 # DistroDeploy
 
 A quick way to deploy docker linux distributions to do some quick code testing.
