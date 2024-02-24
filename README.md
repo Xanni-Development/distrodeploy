@@ -2,6 +2,10 @@
 
 distrodeploy1 (this one) will be archived since we are doing a full rewrite, when distrodeploy 2 is created i will link this to it
 
+THIS SCRIPT DOES WORK
+we just are doing a rewrite for dashboard instead of discord bot, glory to uss all
+
+
 
 # DistroDeploy
 
