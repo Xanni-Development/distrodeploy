@@ -1,11 +1,8 @@
-# Archived
-
-distrodeploy1 (this one) will be archived since we are doing a full rewrite, when distrodeploy 2 is created i will link this to it
-
-THIS SCRIPT DOES WORK
-we just are doing a rewrite for dashboard instead of discord bot, glory to uss all
-
-
+> [!CAUTION]
+> This project is no longer maintained and will be rewriten for website instead of discord bot.
+> This project **does** work.
+> 
+> For the new project's repository visit [backend]() and [frontend]()
 
 # DistroDeploy
 
